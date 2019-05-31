@@ -1,28 +1,31 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <Input class="mt-2" @add="add"/>
+    <List class="mt-2" :items="items" @remove="remove"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Input from "@/components/input.vue";
+import List from "@/components/list.vue";
 
 export default {
-  name: 'app',
   components: {
-    HelloWorld
+    Input,
+    List
+  },
+  data() {
+    return {
+      items: []
+    };
+  },
+  methods: {
+    add(value) {
+      this.items.push(value);
+    },
+    remove(index) {
+      this.$delete(this.items, index);
+    }
   }
-}
+};
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
